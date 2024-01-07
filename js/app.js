@@ -83,7 +83,7 @@ class TodoItem {
     if (isEditing) {
       btns.push({
         className: "todo-list__item-btn todo-list__item-btn--save",
-        src: "/assets/save.svg",
+        src: "./assets/save.svg",
         alt: "save",
         action: () => {
           this.edit(itemContent.value);
@@ -95,7 +95,7 @@ class TodoItem {
         btns.push(
           {
             className: "todo-list__item-btn todo-list__item-btn--check",
-            src: "/assets/check.svg",
+            src: "./assets/check.svg",
             alt: "check",
             action: () => {
               this.toggleStatus();
@@ -103,7 +103,7 @@ class TodoItem {
           },
           {
             className: "todo-list__item-btn todo-list__item-btn--edit",
-            src: "/assets/edit.svg",
+            src: "./assets/edit.svg",
             alt: "edit",
             action: () => {
               this.toggleEdit();
@@ -111,7 +111,7 @@ class TodoItem {
           },
           {
             className: "todo-list__item-btn todo-list__item-btn--delete",
-            src: "/assets/delete.svg",
+            src: "./assets/delete.svg",
             alt: "delete",
             action: () => {
               this.delete();
@@ -122,7 +122,7 @@ class TodoItem {
         btns.push(
           {
             className: "todo-list__item-btn todo-list__item-btn--uncheck",
-            src: "/assets/uncheck.svg",
+            src: "./assets/uncheck.svg",
             alt: "uncheck",
             action: () => {
               this.toggleStatus();
@@ -130,7 +130,7 @@ class TodoItem {
           },
           {
             className: "todo-list__item-btn todo-list__item-btn--edit",
-            src: "/assets/edit.svg",
+            src: "./assets/edit.svg",
             alt: "edit",
             action: () => {
               this.toggleEdit();
@@ -138,7 +138,7 @@ class TodoItem {
           },
           {
             className: "todo-list__item-btn todo-list__item-btn--delete",
-            src: "/assets/delete.svg",
+            src: "./assets/delete.svg",
             alt: "delete",
             action: () => {
               this.delete();
