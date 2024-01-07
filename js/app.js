@@ -23,12 +23,17 @@ class TodoItem {
 
   delete() {
     const index = this.todoList.items.indexOf(this);
-    this.todoList.items.splice(index, 1);
-    if (this.status === "active") {
-      this.todoList.render(todoListContainer, "active");
-    } else {
-      this.todoList.render(doneListContainer, "completed");
-    }
+
+    const item = document.querySelector(`#item-${index}`);
+    item.classList.add("fade-out");
+    setTimeout(() => {
+      this.todoList.items.splice(index, 1);
+      if (this.status === "active") {
+        this.todoList.render(todoListContainer, "active");
+      } else {
+        this.todoList.render(doneListContainer, "completed");
+      }
+    }, 500);
   }
 
   toggleStatus() {
@@ -44,6 +49,7 @@ class TodoItem {
     const item = document.createElement("li");
     item.className =
       status === "active" ? "todo-list__item" : "done-list__item";
+    item.id = `item-${this.todoList.items.indexOf(this)}`;
     const itemContainer = document.createElement("div");
     itemContainer.className =
       status === "active"
@@ -204,6 +210,12 @@ const handleAddTodo = () => {
   todoList.addItem(title);
   todoList.render(todoListContainer, "active");
   addTodoInput.value = "";
+
+  const newItem = todoListContainer.lastChild;
+  newItem.classList.add("fade-in");
+  setTimeout(() => {
+    newItem.classList.remove("fade-in");
+  }, 1000);
 };
 
 addTodoBtn.addEventListener("click", () => {
