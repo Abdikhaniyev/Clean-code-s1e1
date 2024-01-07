@@ -6,7 +6,6 @@ class TodoItem {
     this.title = title;
     this.status = status;
     this.isEditing = false;
-    this.isDeleted = false;
   }
 
   edit(newTitle) {
@@ -16,6 +15,11 @@ class TodoItem {
   toggleEdit() {
     this.isEditing = !this.isEditing;
     this.todoList.render(todoListContainer);
+  }
+
+  delete() {
+    const index = this.todoList.items.indexOf(this);
+    this.todoList.items.splice(index, 1);
   }
 
   render() {
@@ -83,6 +87,10 @@ class TodoItem {
           className: "todo-list__item-btn todo-list__item-btn--delete",
           src: "/assets/delete.svg",
           alt: "delete",
+          action: () => {
+            this.delete();
+            this.todoList.render(todoListContainer);
+          },
         }
       );
     } else if (status === "completed") {
