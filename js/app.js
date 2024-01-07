@@ -14,12 +14,18 @@ class TodoItem {
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
-    this.todoList.render(todoListContainer);
+    this.todoList.render(todoListContainer, "active");
   }
 
   delete() {
     const index = this.todoList.items.indexOf(this);
     this.todoList.items.splice(index, 1);
+  }
+
+  toggleStatus() {
+    this.status = this.status === "active" ? "completed" : "active";
+    this.todoList.render(todoListContainer, "active");
+    this.todoList.render(doneListContainer, "completed");
   }
 
   render() {
@@ -74,6 +80,9 @@ class TodoItem {
           className: "todo-list__item-btn todo-list__item-btn--check",
           src: "/assets/check.svg",
           alt: "check",
+          action: () => {
+            this.toggleStatus();
+          },
         },
         {
           className: "todo-list__item-btn todo-list__item-btn--edit",
@@ -89,7 +98,7 @@ class TodoItem {
           alt: "delete",
           action: () => {
             this.delete();
-            this.todoList.render(todoListContainer);
+            this.todoList.render(todoListContainer, this.status);
           },
         }
       );
@@ -99,6 +108,9 @@ class TodoItem {
           className: "todo-list__item-btn todo-list__item-btn--uncheck",
           src: "/assets/uncheck.svg",
           alt: "uncheck",
+          action: () => {
+            this.toggleStatus();
+          },
         },
         {
           className: "todo-list__item-btn todo-list__item-btn--edit",
@@ -147,16 +159,17 @@ class TodoList {
     this.items.push(new TodoItem(this, title, status));
   }
 
-  render(container) {
+  render(container, status) {
     container.innerHTML = "";
-    if (this.items.length === 0) {
+    const items = this.items.filter((item) => item.status === status);
+    if (items.length === 0) {
       const emptyList = document.createElement("p");
       emptyList.className = "empty-list";
       emptyList.innerText = "Empty";
       container.appendChild(emptyList);
       return;
     } else {
-      this.items.forEach((item, index) => {
+      items.forEach((item) => {
         container.appendChild(item.render());
       });
     }
@@ -165,8 +178,6 @@ class TodoList {
 
 const todoListContainer = document.querySelector(".todo-list__container");
 const doneListContainer = document.querySelector(".done-list__container");
-
-const todoList = new TodoList();
 
 const addTodoInput = document.querySelector(".add-todo__input");
 const addTodoBtn = document.querySelector(".add-todo__btn");
@@ -177,7 +188,7 @@ const handleAddTodo = () => {
   }
   const title = addTodoInput.value;
   todoList.addItem(title);
-  todoList.render(todoListContainer);
+  todoList.render(todoListContainer, "active");
   addTodoInput.value = "";
 };
 
@@ -191,14 +202,6 @@ addTodoInput.addEventListener("keydown", (e) => {
   }
 });
 
-const activeTodoList = new TodoList();
-const activeItems = todoList.items.filter((item) => item.status === "active");
-activeTodoList.items = activeItems;
-activeTodoList.render(todoListContainer);
-
-const doneTodoList = new TodoList();
-const completedItems = todoList.items.filter(
-  (item) => item.status === "completed"
-);
-doneTodoList.items = completedItems;
-doneTodoList.render(doneListContainer);
+const todoList = new TodoList();
+todoList.render(todoListContainer, "active");
+todoList.render(doneListContainer, "completed");
