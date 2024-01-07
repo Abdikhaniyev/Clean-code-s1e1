@@ -1,11 +1,21 @@
 "use strict";
 
 class TodoItem {
-  constructor(title, status) {
+  constructor(todoList, title, status) {
+    this.todoList = todoList;
     this.title = title;
     this.status = status;
     this.isEditing = false;
     this.isDeleted = false;
+  }
+
+  edit(newTitle) {
+    this.title = newTitle;
+  }
+
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+    this.todoList.render(todoListContainer);
   }
 
   render() {
@@ -24,6 +34,7 @@ class TodoItem {
     const itemContent = isEditing
       ? document.createElement("input")
       : document.createElement("div");
+
     itemContent.className =
       status === "active"
         ? isEditing
@@ -48,6 +59,10 @@ class TodoItem {
         className: "todo-list__item-btn todo-list__item-btn--save",
         src: "/assets/save.svg",
         alt: "save",
+        action: () => {
+          this.edit(itemContent.value);
+          this.toggleEdit();
+        },
       });
     } else if (!isEditing && status === "active") {
       btns.push(
@@ -60,6 +75,9 @@ class TodoItem {
           className: "todo-list__item-btn todo-list__item-btn--edit",
           src: "/assets/edit.svg",
           alt: "edit",
+          action: () => {
+            this.toggleEdit();
+          },
         },
         {
           className: "todo-list__item-btn todo-list__item-btn--delete",
@@ -78,6 +96,9 @@ class TodoItem {
           className: "todo-list__item-btn todo-list__item-btn--edit",
           src: "/assets/edit.svg",
           alt: "edit",
+          action: () => {
+            this.toggleEdit();
+          },
         },
         {
           className: "todo-list__item-btn todo-list__item-btn--delete",
@@ -94,6 +115,9 @@ class TodoItem {
       btnImg.src = btn.src;
       btnImg.alt = btn.alt;
       btnImg.className = "todo-list__item-btn-img";
+      btnEl.addEventListener("click", () => {
+        btn.action();
+      });
       btnEl.appendChild(btnImg);
       itemBtns.appendChild(btnEl);
     });
@@ -112,7 +136,7 @@ class TodoList {
   }
 
   addItem(title, status = "active") {
-    this.items.push(new TodoItem(title, status));
+    this.items.push(new TodoItem(this, title, status));
   }
 
   render(container) {
@@ -124,7 +148,7 @@ class TodoList {
       container.appendChild(emptyList);
       return;
     } else {
-      this.items.forEach((item) => {
+      this.items.forEach((item, index) => {
         container.appendChild(item.render());
       });
     }
