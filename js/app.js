@@ -14,7 +14,11 @@ class TodoItem {
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
-    this.todoList.render(todoListContainer, "active");
+    if (this.status === "active") {
+      this.todoList.render(todoListContainer, "active");
+    } else {
+      this.todoList.render(doneListContainer, "completed");
+    }
   }
 
   delete() {
@@ -69,7 +73,8 @@ class TodoItem {
       status === "active" ? "todo-list__item-btns" : "done-list__item-btns";
 
     const btns = [];
-    if (isEditing && status === "active") {
+
+    if (isEditing) {
       btns.push({
         className: "todo-list__item-btn todo-list__item-btn--save",
         src: "/assets/save.svg",
@@ -79,60 +84,62 @@ class TodoItem {
           this.toggleEdit();
         },
       });
-    } else if (!isEditing && status === "active") {
-      btns.push(
-        {
-          className: "todo-list__item-btn todo-list__item-btn--check",
-          src: "/assets/check.svg",
-          alt: "check",
-          action: () => {
-            this.toggleStatus();
+    } else {
+      if (status === "active") {
+        btns.push(
+          {
+            className: "todo-list__item-btn todo-list__item-btn--check",
+            src: "/assets/check.svg",
+            alt: "check",
+            action: () => {
+              this.toggleStatus();
+            },
           },
-        },
-        {
-          className: "todo-list__item-btn todo-list__item-btn--edit",
-          src: "/assets/edit.svg",
-          alt: "edit",
-          action: () => {
-            this.toggleEdit();
+          {
+            className: "todo-list__item-btn todo-list__item-btn--edit",
+            src: "/assets/edit.svg",
+            alt: "edit",
+            action: () => {
+              this.toggleEdit();
+            },
           },
-        },
-        {
-          className: "todo-list__item-btn todo-list__item-btn--delete",
-          src: "/assets/delete.svg",
-          alt: "delete",
-          action: () => {
-            this.delete();
+          {
+            className: "todo-list__item-btn todo-list__item-btn--delete",
+            src: "/assets/delete.svg",
+            alt: "delete",
+            action: () => {
+              this.delete();
+            },
+          }
+        );
+      } else {
+        btns.push(
+          {
+            className: "todo-list__item-btn todo-list__item-btn--uncheck",
+            src: "/assets/uncheck.svg",
+            alt: "uncheck",
+            action: () => {
+              this.toggleStatus();
+            },
           },
-        }
-      );
-    } else if (status === "completed") {
-      btns.push(
-        {
-          className: "todo-list__item-btn todo-list__item-btn--uncheck",
-          src: "/assets/uncheck.svg",
-          alt: "uncheck",
-          action: () => {
-            this.toggleStatus();
+          {
+            className: "todo-list__item-btn todo-list__item-btn--edit",
+            src: "/assets/edit.svg",
+            alt: "edit",
+            action: () => {
+              this.toggleEdit();
+            },
           },
-        },
-        {
-          className: "todo-list__item-btn todo-list__item-btn--edit",
-          src: "/assets/edit.svg",
-          alt: "edit",
-          action: () => {
-            this.toggleEdit();
-          },
-        },
-        {
-          className: "todo-list__item-btn todo-list__item-btn--delete",
-          src: "/assets/delete.svg",
-          alt: "delete",
-          action: () => {
-            this.delete();
-          },
-        }
-      );
+          {
+            className: "todo-list__item-btn todo-list__item-btn--delete",
+            src: "/assets/delete.svg",
+            alt: "delete",
+            action: () => {
+              this.delete();
+            },
+          }
+        );
+      }
     }
 
     btns.forEach((btn) => {
