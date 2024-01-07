@@ -126,6 +126,7 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  list-style: none;
 }
 
 .todo-list__title,
@@ -207,4 +208,11 @@ hr {
 .done-list__item-text {
   text-decoration: line-through;
   color: #9f9f9f;
+}
+
+.empty-list {
+  font-size: 16px;
+  font-weight: 400;
+  color: #9f9f9f;
+  text-align: center;
 }
