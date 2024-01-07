@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/logo.png" type="image/png">
+    <title>Todo App | RS School</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo">
+                <img src="/assets/logo.png" alt="logo" class="header__logo-img">
+                <h1 class="header__logo-title">Todo App</h1>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="main__container">
+            <h2 class="main__title">Todo List</h2>
+
+            <div class="container">
+                <div class="add-todo">
+                    <div class="add-todo__container">
+                        <input type="text" class="add-todo__input" placeholder="Add new todo">
+                        <button class="btn add-todo__btn">
+                            <img src="/assets/add.svg" alt="add" class="add-todo__btn-img">
+                        </button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="todo-list">
+                    <div class="todo-list__container">
+                        <h3 class="todo-list__title">Todos</h3>
+                        <div class="todo-list__item">
+                            <div class="todo-list__item-container">
+                                <div class="todo-list__item-text">Todo 1</div>
+                                <div class="todo-list__item-btns">
+                                    <button class="btn todo-list__item-btn todo-list__item-btn--check">
+                                        <img src="/assets/check.svg" alt="check" class="todo-list__item-btn-img">
+                                    </button>
+                                    <button class="btn todo-list__item-btn todo-list__item-btn--edit">
+                                        <img src="/assets/edit.svg" alt="edit" class="todo-list__item-btn-img">
+                                    </button>
+                                    <button class="btn todo-list__item-btn todo-list__item-btn--delete">
+                                        <img src="/assets/delete.svg" alt="delete" class="todo-list__item-btn-img">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="todo-list__item">
+                            <div class="todo-list__item-container">
+                                <input type="text" class="todo-list__item-input" placeholder="Edit todo" value="Todo 2">
+                                <div class="todo-list__item-btns">
+                                    <button class="btn todo-list__item-btn todo-list__item-btn--check">
+                                        <img src="/assets/check.svg" alt="check" class="todo-list__item-btn-img">
+                                    </button>
+                                    <button class="btn todo-list__item-btn todo-list__item-btn--save">
+                                        <img src="/assets/save.svg" alt="save" class="todo-list__item-btn-img">
+                                    </button>
+                                    <button class="btn todo-list__item-btn todo-list__item-btn--delete">
+                                        <img src="/assets/delete.svg" alt="delete" class="todo-list__item-btn-img">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="done-list">
+                    <div class="done-list__container">
+                        <h3 class="done-list__title">Completed</h3>
+                        <div class="done-list__item">
+                            <div class="done-list__item-container">
+                                <div class="done-list__item-text">Done 1</div>
+                                <div class="done-list__item-btns">
+                                    <button class="btn todo-list__item-btn todo-list__item-btn--uncheck">
+                                        <img src="/assets/uncheck.svg" alt="uncheck" class="todo-list__item-btn-img">
+                                    </button>
+                                    <button class="btn done-list__item-btn done-list__item-btn--delete">
+                                        <img src="/assets/delete.svg" alt="delete" class="done-list__item-btn-img">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+</body>
+
+</html>
