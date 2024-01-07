@@ -20,6 +20,11 @@ class TodoItem {
   delete() {
     const index = this.todoList.items.indexOf(this);
     this.todoList.items.splice(index, 1);
+    if (this.status === "active") {
+      this.todoList.render(todoListContainer, "active");
+    } else {
+      this.todoList.render(doneListContainer, "completed");
+    }
   }
 
   toggleStatus() {
@@ -98,7 +103,6 @@ class TodoItem {
           alt: "delete",
           action: () => {
             this.delete();
-            this.todoList.render(todoListContainer, this.status);
           },
         }
       );
@@ -124,6 +128,9 @@ class TodoItem {
           className: "todo-list__item-btn todo-list__item-btn--delete",
           src: "/assets/delete.svg",
           alt: "delete",
+          action: () => {
+            this.delete();
+          },
         }
       );
     }
